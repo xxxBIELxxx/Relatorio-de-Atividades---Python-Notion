@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarefa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 40px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 20px 30px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px;
+    }
+
+    .quadrante {
+      border-radius: 8px;
+      padding: 15px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .quadrante h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .faca-agora {
+      border-left: 6px solid #ff4d4d;
+      background-color: #ffe6e6;
+    }
+
+    .agende {
+      border-left: 6px solid #ffa500;
+      background-color: #fff3e0;
+    }
+
+    .delegue {
+      border-left: 6px solid #1e90ff;
+      background-color: #e6f0ff;
+    }
+
+    .elimine {
+      border-left: 6px solid #32cd32;
+      background-color: #e8ffe8;
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: 20px;
+      margin: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Matriz de Eisenhower</h1>
+      <p>Relatório de atividades</p>
+    </div>
+
+    <div class="grid">
+      <div class="quadrante faca-agora">
+        <h3>Faça Agora (Urgente e Importante)</h3>
+        <ul>
+          {% for tarefa in dados %}
+            {% if tarefa.get("Categoria") == "Faça Agora" %}
+              <li>{{ tarefa.get("Tarefa") }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="quadrante agende">
+        <h3>Agende (Importante, mas não urgente)</h3>
+        <ul>
+          {% for tarefa in dados %}
+            {% if tarefa.get("Categoria") == "Agende" %}
+              <li>{{ tarefa.get("Tarefa") }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="quadrante delegue">
+        <h3>Delegue (Urgente, mas não importante)</h3>
+        <ul>
+          {% for tarefa in dados %}
+            {% if tarefa.get("Categoria") == "Delegue" %}
+              <li>{{ tarefa.get("Tarefa") }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="quadrante elimine">
+        <h3>Elimine (Nem urgente nem importante)</h3>
+        <ul>
+          {% for tarefa in dados %}
+            {% if tarefa.get("Categoria") == "Elimine" %}
+              <li>{{ tarefa.get("Tarefa") }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
